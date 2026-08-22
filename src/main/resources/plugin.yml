@@ -1,0 +1,8 @@
+name: CCWeapons
+version: '${version}'
+
+main: dev.lap.cCWeapons.CCWeapons
+api-version: '1.21.11'
+load: POSTWORLD
+
+authors: [ LAPDK66 ]
