@@ -1,0 +1,281 @@
+# CCWeapons configuration
+#
+# Each registered weapon can be enabled or disabled separately.
+# Recipes can also be disabled without disabling the weapon itself.
+#
+# After changing this file, run:
+# /ccweapons reload
+
+weapons:
+  legacy_wooden_sword:
+    enabled: true
+    recipe:
+      enabled: true
+      amount: 1
+      shape:
+        - " P "
+        - " P "
+        - " S "
+      ingredients:
+        P: OAK_PLANKS
+        S: NETHER_STAR
+
+  legacy_stone_sword:
+    enabled: true
+    recipe:
+      enabled: true
+      amount: 1
+      shape:
+        - " C "
+        - " C "
+        - " S "
+      ingredients:
+        C: COBBLESTONE
+        S: NETHER_STAR
+
+  legacy_iron_sword:
+    enabled: true
+    recipe:
+      enabled: true
+      amount: 1
+      shape:
+        - " I "
+        - " I "
+        - " S "
+      ingredients:
+        I: IRON_INGOT
+        S: NETHER_STAR
+
+  legacy_golden_sword:
+    enabled: true
+    recipe:
+      enabled: true
+      amount: 1
+      shape:
+        - " G "
+        - " G "
+        - " S "
+      ingredients:
+        G: GOLD_INGOT
+        S: NETHER_STAR
+
+  legacy_diamond_sword:
+    enabled: true
+    recipe:
+      enabled: true
+      amount: 1
+      shape:
+        - " D "
+        - " D "
+        - " S "
+      ingredients:
+        D: DIAMOND
+        S: NETHER_STAR
+
+  vampiric_mace:
+    enabled: true
+    recipe:
+      enabled: true
+      amount: 1
+      shape:
+        - " H "
+        - "CNC"
+        - " B "
+      ingredients:
+        H: HEAVY_CORE
+        N: NETHERITE_INGOT
+        B: BREEZE_ROD
+        C: NETHER_STAR
+
+  vampiric_netherite_sword:
+    enabled: true
+    recipe:
+      enabled: true
+      amount: 1
+      shape:
+        - " N "
+        - "CNC"
+        - " S "
+      ingredients:
+        N: NETHERITE_INGOT
+        S: STICK
+        C: NETHER_STAR
+
+  vampiric_netherite_axe:
+    enabled: true
+    recipe:
+      enabled: true
+      amount: 1
+      shape:
+        - "NNC"
+        - "NSC"
+        - " S "
+      ingredients:
+        N: NETHERITE_INGOT
+        S: STICK
+        C: NETHER_STAR
+
+  cursed_dagger:
+    enabled: true
+    recipe:
+      enabled: true
+      amount: 1
+      shape:
+        - " D "
+        - "EIE"
+        - "CSC"
+      ingredients:
+        C: NETHER_STAR
+        I: IRON_INGOT
+        S: STICK
+        D: DRAGON_HEAD
+        E: ENCHANTING_TABLE
+
+  evolving_sword:
+    enabled: true
+    recipe:
+      enabled: true
+      amount: 1
+      shape:
+        - " C "
+        - "ENE"
+        - " S "
+      ingredients:
+        E: EXPERIENCE_BOTTLE
+        N: NETHERITE_INGOT
+        S: STICK
+        C: NETHER_STAR
+
+  mobility_dagger:
+    enabled: true
+    recipe:
+      enabled: true
+      amount: 1
+      shape:
+        - " E "
+        - "GCG"
+        - " S "
+      ingredients:
+        E: ENDER_PEARL
+        G: IRON_INGOT
+        C: NETHER_STAR
+        S: BREEZE_ROD
+
+  teleport_bow:
+    enabled: true
+    recipe:
+      enabled: true
+      amount: 1
+      shape:
+        - "ECS"
+        - "E S"
+        - "ECS"
+      ingredients:
+        E: ENDER_PEARL
+        C: NETHER_STAR
+        S: STRING
+
+  wind_charge_axe:
+    enabled: true
+    recipe:
+      enabled: true
+      amount: 1
+      shape:
+        - "DWC"
+        - "DSW"
+        - " S "
+      ingredients:
+        D: DIAMOND
+        W: WIND_CHARGE
+        C: NETHER_STAR
+        S: BREEZE_ROD
+
+  dash_sword:
+    enabled: true
+    recipe:
+      enabled: true
+      amount: 1
+      shape:
+        - "BEB"
+        - "NSN"
+        - " B "
+      ingredients:
+        B: BREEZE_ROD
+        E: ENDER_PEARL
+        N: NETHERITE_INGOT
+        S: NETHER_STAR
+
+  frost_scythe:
+    enabled: true
+    recipe:
+      enabled: true
+      amount: 1
+      shape:
+        - "PNP"
+        - " IS"
+        - " I "
+      ingredients:
+        P: PACKED_ICE
+        N: NETHER_STAR
+        I: BLUE_ICE
+        S: NETHERITE_INGOT
+
+  thunder_hammer:
+    enabled: true
+    recipe:
+      enabled: true
+      amount: 1
+      shape:
+        - "LCL"
+        - " M "
+        - " B "
+      ingredients:
+        L: LIGHTNING_ROD
+        C: NETHER_STAR
+        M: MACE
+        B: BREEZE_ROD
+
+  gravity_mace:
+    enabled: true
+    recipe:
+      enabled: true
+      amount: 1
+      shape:
+        - "ECE"
+        - " M "
+        - " O "
+      ingredients:
+        E: ENDER_PEARL
+        C: NETHER_STAR
+        M: MACE
+        O: OBSIDIAN
+
+  soul_reaper:
+    enabled: true
+    recipe:
+      enabled: true
+      amount: 1
+      shape:
+        - "SNC"
+        - " NS"
+        - " B "
+      ingredients:
+        S: SOUL_SAND
+        N: NETHERITE_INGOT
+        C: NETHER_STAR
+        B: BONE
+
+  blood_pact_blade:
+    enabled: true
+    recipe:
+      enabled: true
+      amount: 1
+      shape:
+        - "RCR"
+        - "RNR"
+        - " B "
+      ingredients:
+        R: REDSTONE_BLOCK
+        C: NETHER_STAR
+        N: NETHERITE_INGOT
+        B: BLAZE_ROD

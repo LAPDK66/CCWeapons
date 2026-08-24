@@ -1,8 +1,32 @@
 name: CCWeapons
 version: '${version}'
-
 main: dev.lap.cCWeapons.CCWeapons
 api-version: '1.21.11'
-load: POSTWORLD
+load: STARTUP
 
-authors: [ LAPDK66 ]
+authors:
+  - LAPDK66
+
+commands:
+  ccweapons:
+    description: Opens the custom weapons guide and provides administrative weapon commands.
+    usage: /ccweapons
+    aliases:
+      - weapons
+      - ccw
+
+permissions:
+  ccweapons.admin:
+    description: Grants access to all CCWeapons administrative commands.
+    default: op
+    children:
+      ccweapons.admin.give: true
+      ccweapons.admin.reload: true
+
+  ccweapons.admin.give:
+    description: Allows giving custom weapons to players.
+    default: op
+
+  ccweapons.admin.reload:
+    description: Allows reloading the CCWeapons configuration and recipes.
+    default: op
