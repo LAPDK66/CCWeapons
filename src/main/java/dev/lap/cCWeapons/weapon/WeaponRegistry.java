@@ -6,6 +6,7 @@ import org.bukkit.entity.Player;
 import org.bukkit.entity.Projectile;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.persistence.PersistentDataType;
+import org.bukkit.plugin.java.JavaPlugin;
 import org.bukkit.scheduler.BukkitTask;
 
 import java.util.Collection;
@@ -21,6 +22,7 @@ public final class WeaponRegistry {
 
     private final CCWeapons plugin;
     private final Map<String, CustomWeapon> weapons = new LinkedHashMap<>();
+    private final Map<String, JavaPlugin> weaponOwners = new LinkedHashMap<>();
 
     private BukkitTask effectTask;
     private long effectTick;
@@ -30,7 +32,26 @@ public final class WeaponRegistry {
     }
 
     public void register(CustomWeapon weapon) {
+        register(plugin, weapon);
+    }
+
+    public void register(JavaPlugin owner, CustomWeapon weapon) {
+        if (owner == null) {
+            throw new IllegalArgumentException("The weapon owner cannot be null.");
+        }
+
+        if (weapon == null) {
+            throw new IllegalArgumentException("The weapon cannot be null.");
+        }
+
         String id = weapon.getId().toLowerCase(Locale.ROOT);
+
+        if (!id.matches("[a-z0-9._-]+")) {
+            throw new IllegalArgumentException(
+                    "Weapon IDs may only contain lowercase letters, numbers, "
+                            + "periods, underscores and hyphens: " + id
+            );
+        }
 
         if (weapons.containsKey(id)) {
             throw new IllegalArgumentException(
@@ -39,7 +60,36 @@ public final class WeaponRegistry {
         }
 
         weapons.put(id, weapon);
-        plugin.getLogger().info("Registered weapon: " + id);
+        weaponOwners.put(id, owner);
+        plugin.getLogger().info(
+                "Registered weapon: " + id + " (owner: "
+                        + owner.getName() + ")"
+        );
+    }
+
+    public Collection<CustomWeapon> unregisterOwnedBy(JavaPlugin owner) {
+        Collection<CustomWeapon> removedWeapons = weapons.values()
+                .stream()
+                .filter(weapon -> owner.equals(weaponOwners.get(weapon.getId())))
+                .toList();
+
+        for (CustomWeapon weapon : removedWeapons) {
+            weapons.remove(weapon.getId());
+            weaponOwners.remove(weapon.getId());
+            plugin.getLogger().info(
+                    "Unregistered weapon: " + weapon.getId()
+            );
+        }
+
+        return removedWeapons;
+    }
+
+    public Optional<JavaPlugin> getOwner(CustomWeapon weapon) {
+        if (weapon == null) {
+            return Optional.empty();
+        }
+
+        return Optional.ofNullable(weaponOwners.get(weapon.getId()));
     }
 
     public Optional<CustomWeapon> getWeapon(String id) {
@@ -84,7 +134,9 @@ public final class WeaponRegistry {
     }
 
     public boolean isEnabled(CustomWeapon weapon) {
-        return plugin.getConfig().getBoolean(
+        JavaPlugin owner = getOwner(weapon).orElse(plugin);
+
+        return owner.getConfig().getBoolean(
                 "weapons." + weapon.getId() + ".enabled",
                 true
         );

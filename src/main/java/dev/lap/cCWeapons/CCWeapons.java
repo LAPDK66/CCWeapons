@@ -1,5 +1,7 @@
 package dev.lap.cCWeapons;
 
+import dev.lap.cCWeapons.api.AddonLifecycleListener;
+import dev.lap.cCWeapons.api.CCWeaponsApi;
 import dev.lap.cCWeapons.command.WeaponCommand;
 import dev.lap.cCWeapons.gui.WeaponGuideMenu;
 import dev.lap.cCWeapons.listener.WeaponListener;
@@ -22,12 +24,14 @@ import org.bukkit.Material;
 import org.bukkit.NamespacedKey;
 import org.bukkit.command.PluginCommand;
 import org.bukkit.plugin.java.JavaPlugin;
+import org.bukkit.plugin.ServicePriority;
 
 public final class CCWeapons extends JavaPlugin {
 
     private NamespacedKey weaponKey;
     private WeaponRegistry weaponRegistry;
     private WeaponRecipeManager recipeManager;
+    private CCWeaponsApi api;
 
     @Override
     public void onEnable() {
@@ -41,9 +45,18 @@ public final class CCWeapons extends JavaPlugin {
         recipeManager = new WeaponRecipeManager(this, weaponRegistry);
         recipeManager.reloadRecipes();
 
+        api = new CCWeaponsApi(weaponRegistry, recipeManager);
+        getServer().getServicesManager().register(
+                CCWeaponsApi.class,
+                api,
+                this,
+                ServicePriority.Normal
+        );
+
         WeaponGuideMenu weaponGuideMenu = new WeaponGuideMenu(
                 this,
-                weaponRegistry
+                weaponRegistry,
+                recipeManager
         );
 
         getServer().getPluginManager().registerEvents(
@@ -52,6 +65,10 @@ public final class CCWeapons extends JavaPlugin {
         );
         getServer().getPluginManager().registerEvents(
                 weaponGuideMenu,
+                this
+        );
+        getServer().getPluginManager().registerEvents(
+                new AddonLifecycleListener(this, api),
                 this
         );
 
@@ -221,5 +238,13 @@ public final class CCWeapons extends JavaPlugin {
 
     public NamespacedKey getKey(String key) {
         return new NamespacedKey(this, key);
+    }
+
+    /**
+     * Direct API access for plugins that use CCWeapons as a compile-time
+     * dependency. Bukkit's ServicesManager is the preferred decoupled access.
+     */
+    public CCWeaponsApi getApi() {
+        return api;
     }
 }
