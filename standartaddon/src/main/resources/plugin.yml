@@ -1,0 +1,9 @@
+name: CCWeapons-StandartAddon
+version: '${project.version}'
+main: dev.lap.standartaddon.StandartAddon
+api-version: '1.21.11'
+authors:
+  - lap
+description: Two example addon weapons for CCWeapons.
+depend:
+  - CCWeapons

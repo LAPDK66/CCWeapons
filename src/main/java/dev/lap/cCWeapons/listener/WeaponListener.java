@@ -53,8 +53,12 @@ public final class WeaponListener implements Listener {
             return;
         }
 
-        if (event.getAction() != Action.RIGHT_CLICK_AIR
-                && event.getAction() != Action.RIGHT_CLICK_BLOCK) {
+        boolean leftClick = event.getAction() == Action.LEFT_CLICK_AIR
+                || event.getAction() == Action.LEFT_CLICK_BLOCK;
+        boolean rightClick = event.getAction() == Action.RIGHT_CLICK_AIR
+                || event.getAction() == Action.RIGHT_CLICK_BLOCK;
+
+        if (!leftClick && !rightClick) {
             return;
         }
 
@@ -63,6 +67,16 @@ public final class WeaponListener implements Listener {
                 .orElse(null);
 
         if (weapon == null) {
+            return;
+        }
+
+        if (leftClick) {
+            weapon.onLeftClick(event.getPlayer(), event);
+
+            if (weapon.usesLeftClickAbility()) {
+                event.setCancelled(true);
+            }
+
             return;
         }
 

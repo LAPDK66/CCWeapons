@@ -90,6 +90,27 @@ public abstract class CustomWeapon {
     }
 
     /**
+     * Returns whether this weapon has a left-click ability.
+     */
+    public boolean usesLeftClickAbility() {
+        return false;
+    }
+
+    /**
+     * Shared left-click ability hook.
+     */
+    public void onLeftClick(Player player) {
+    }
+
+    /**
+     * Called when the player left-clicks air or a block while holding the
+     * weapon.
+     */
+    public void onLeftClick(Player player, PlayerInteractEvent event) {
+        onLeftClick(player);
+    }
+
+    /**
      * Returns whether this weapon has a right-click ability.
      */
     public boolean usesRightClickAbility() {

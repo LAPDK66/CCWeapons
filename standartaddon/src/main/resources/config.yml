@@ -1,0 +1,33 @@
+# Recipes and enabled states belong to this addon's own configuration.
+# The keys must exactly match the IDs returned by the weapon classes.
+
+weapons:
+  pulse_blade:
+    enabled: true
+    recipe:
+      enabled: true
+      amount: 1
+      shape:
+        - " AE"
+        - " DA"
+        - "S  "
+      ingredients:
+        A: AMETHYST_SHARD
+        E: ECHO_SHARD
+        D: DIAMOND
+        S: STICK
+
+  ember_axe:
+    enabled: true
+    recipe:
+      enabled: true
+      amount: 1
+      shape:
+        - "FND"
+        - "FS "
+        - " S "
+      ingredients:
+        F: FIRE_CHARGE
+        N: NETHERITE_SCRAP
+        D: DIAMOND
+        S: BLAZE_ROD
