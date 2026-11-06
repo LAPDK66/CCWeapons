@@ -175,15 +175,16 @@ public final class WeaponGuideMenu implements Listener {
         );
         holder.setInventory(inventory);
 
-        WeaponRecipeDefinition recipe = recipeManager.getRecipe(weapon)
-                .orElse(null);
+        WeaponRecipeDefinition recipe = recipeManager.isRecipeEnabled(weapon)
+                ? recipeManager.getRecipe(weapon).orElse(null)
+                : null;
 
         if (recipe == null) {
             inventory.setItem(
                     21,
                     createInfoItem(
                             Material.BARRIER,
-                            "No recipe configured",
+                            "No recipe available",
                             NamedTextColor.RED
                     )
             );
